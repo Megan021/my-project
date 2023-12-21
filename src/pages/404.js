@@ -15,7 +15,7 @@ export const PageNotFound = () => {
             <h1 className='text-4xl font-bold text-[#0D4451] mb-2'>Page Not Found</h1><br />
             
             <p className='text-[#0D4451] font-semibold mb-5 text-lg'>We’re sorry, the page you have looked for does not exist in our website!<br /> Maybe go to our home page or try to use a search?</p><br />
-            <Link to='/'><button className='h-12 w-80 bg-[#F7A41B] text-white font-medium'>Back to Home Page</button></Link>
+            <Link to='/login'><button className='h-12 w-80 bg-[#F7A41B] text-white font-medium'>Go to Login Page</button></Link>
         </div>
     )
 }

@@ -8,7 +8,7 @@ import { AiFillCode } from'react-icons/ai';
 export const Category = () => {
     return (
         <>
-            <div>
+            {/* <div>
                 <h1 className='flex font-bold text-5xl justify-center pt-12 mb-14'>Explore By Category</h1>
                 <div className='flex items-center w-[90rem] rounded-2xl border drop-shadow-xl border-slate-300 ml-10'>
                     <div className='flex-1 max-w-7xl mx-auto p-10'>
@@ -56,7 +56,9 @@ export const Category = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+
+            
 
         </>
     )

@@ -1,9 +1,11 @@
-import React from 'react'
-import Logo from '../images/logo.jpg'
+import React from 'react';
+import Logo from '../images/logo.jpg';
 import { Link } from 'react-router-dom';
-import { BsArrowLeftCircleFill } from 'react-icons/bs'
+import Employer from '../images/Employer2.jpg';
+import Jobseeker from '../images/heroimg.jpg';
 
 export const Signup = () => {
+
   return (
     <>
       <div className='flex mt-10 justify-center'>
@@ -13,32 +15,26 @@ export const Signup = () => {
             <h2 className='text-white text-3xl text-center'>JobDoors</h2>
             <p className='text-center text-white p-5'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, esse.</p>
           </div>
-
         </div>
-        <div className='h-[30rem] w-[40rem] bg-white shadow-2xl border rounded-r-md'>
-          <div className='ml-[9.5rem]'>
-            <h2 className='text-4xl font-semibold mb-5 mt-9'>Sign Up</h2>
-            <p className='mb-1'>Email</p>
-            <input type='email' name="name" id='name' placeholder='Enter Email' className='h-12 w-[21rem] border rounded border-gray-400 pl-2 mb-5' />
-            <p className='mb-1'>Password</p>
-            <input type='password' name="name" id='name' placeholder='Create Password' className='h-12 w-[21rem] border rounded border-gray-400 pl-2 mb-5' />
 
-            <br />
-            <div>
-            <input type='radio' name='radio' value='Employee' id='employee' />
-            <label htmlFor="employee" className='ml-1 text-lg pr-8'>Employee</label>
-            <input type='radio' name='radio' value='Jobeeker' id='jobeeker' />
-            <label htmlFor="jobeeker" className='ml-1 text-lg '>Jobseeker</label>
-            </div>
-
-            <button className='h-12 w-[11rem] bg-[#0D4451] text-white text-[1.3rem] pb-1 mt-9 rounded-md'>Sign Up</button> <br />
-            <div className='mt-5 flex'>
-              <Link to='/login' className='text-lg underline underline-offset-2'>Already have an account ?</Link>
-              <i><BsArrowLeftCircleFill className='h-5 w-auto ml-4 mt-1' color='#F7A41B' /></i>
-            </div>
+        <div className='h-[30rem] w-[40rem] bg-white shadow-xl border border-gray-300 rounded-r-md'>
+        <h2 className='text-4xl text-center font-semibold mb-5 mt-9'>Register</h2>
+          <div className='h-[10rem] w-[27rem] mb-5 rounded-lg shadow-md shadow-slate-400 hover:shadow-slate-600 duration-200 m-auto'>
+            <Link to='/employersignup'>
+              <img className='h-[8rem] m-auto' src={Employer} alt='Employer Img' />
+              <h2 className='text-center '>Employer Register</h2>
+            </Link>
           </div>
+          <div className='h-[10rem] w-[27rem] rounded-lg shadow-md shadow-slate-400 hover:shadow-slate-600 duration-200 m-auto'>
+            <Link to='/jobseekersignup'>
+              <img className='h-[7rem] m-auto' src={Jobseeker} alt='Employer Img' />
+              <h2 className='text-center pt-[1.2rem]'>Jobseeker Register</h2>
+            </Link>
+          </div>
+
         </div>
       </div>
+
     </>
   )
 }

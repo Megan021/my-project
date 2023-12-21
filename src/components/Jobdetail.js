@@ -1,21 +1,68 @@
-import React from 'react'
-import CompanyLogo from '../images/companylogo.jpg'
-import { RxTriangleRight } from 'react-icons/rx'
-import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// import jwtDecode from 'jwt-decode'; 
 
 export const Jobdetail = () => {
+  const navigate = useNavigate();
+  const { jobId } = useParams();
+  const [jobDetail, setJobDetail] = useState(null);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    fetch(`/joblist/${jobId}`)
+      .then((response) => response.json())
+      .then((data) => setJobDetail(data))
+      .catch((error) => console.error('Error fetching job detail:', error));
+  }, [jobId]);
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('/apply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          jobId: jobId,
+          name: name,
+          email: email
+        })
+      });
+      const data = await res.json();
+      if (data.message === 'Application submitted successfully') { // Check the success message
+        window.alert('Application submitted successfully!');
+      } else {
+        window.alert('Application submission failed.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Login to submit application');
+      navigate('/login');
+    }
+  };
+
+  // Check if the data is still being fetched
+  if (!jobDetail) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       <div className='flex justify-center'>
         <div className='flex items-center h-[15rem] w-[80%] mt-14 border border-gray-300 rounded'>
           <div className='flex justify-around'>
-            <div>
-              <img src={CompanyLogo} className='h-auto w-[25rem]' />
-            </div>
-            <div>
-              <h2 className='text-4xl mb-3'>Job Title</h2>
-              <button className='h-7 w-20 text-white bg-[#0D4451] border rounded-lg mb-5 mr-2'>Full Time</button>
-              <p className='pr-5'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum excepturi omnis ab odit amet magni architecto a delectus reiciendis earum? Ipsa voluptatum eaque necessitatibus et? Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+
+            <div className='p-5'>
+              <h2 className='text-4xl mb-3'>{jobDetail.title}</h2>
+              <p className='mb-2 italic'>@ {jobDetail.company}</p>
+              <button className='h-7 w-20 text-white bg-[#0D4451] border rounded-lg mb-5 mr-2'>{jobDetail.workType}</button>
+              <button className='py-[2px] text-white bg-[#0D4451] border rounded-lg mb-5 mr-2 px-2'>{jobDetail.skill && jobDetail.skill.join(', ')}</button>
+              <button className='py-[2px] w-20 text-white bg-[#0D4451] border rounded-lg mb-5 mr-2'>Rs. {jobDetail.salary}</button>
+              <p className='pr-5 line-clamp-3'>{jobDetail.discription}</p>
             </div>
           </div>
         </div>
@@ -24,42 +71,33 @@ export const Jobdetail = () => {
       <div className='ml-[9.4rem]'>
         <div className='flex h-auto w-[60%] mt-14 border border-gray-300 rounded'>
           <div className='pl-5 pr-5 pt-5 space-y-5'>
-            <h2 className='text-3xl font-medium'>Job Description</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus atque alias ullam nisi laborum corporis! Officia corporis sapiente itaque corrupti natus, suscipit, quae tempore rem, necessitatibus perspiciatis voluptas et amet. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem dicta recusandae enim esse repellendus eius, voluptatibus natus sed veritatis consectetur excepturi atque, tempora cumque temporibus soluta nesciunt? Nulla, est distinctio?</p>
-            <h2 className='text-3xl font-medium'>Responsibility</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto inventore ex deserunt blanditiis rerum iure, reiciendis, totam dolorem repellat eveniet doloremque aut in? Nulla debitis inventore dolorum laboriosam ullam numquam.</p>
-            <ul className='space-y-3'>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-            </ul>
-            <h2 className='text-3xl font-medium'>Qualifications</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto inventore ex deserunt blanditiis rerum iure, reiciendis, totam dolorem repellat eveniet doloremque aut in? Nulla debitis inventore dolorum laboriosam ullam numquam.</p>
-            <ul className='space-y-3 pb-6'>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-              <li className='flex'><RxTriangleRight className='mr-3 mt-[0.4rem]' />Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ipsam.</li>
-            </ul>
-            <div className='h-auto w-[47rem] border rounded pl-6 pb-6 ml-4 mb-6'>
-              <h2 className='text-3xl font-semibold mb-7 mt-3'>Apply for the Job</h2>
+            <h2 className='text-3xl font-medium'>Job Discription</h2>
+            <p>{jobDetail.discription}</p>
+            <form onSubmit={handleSubmit}>
               <div className='flex gap-1'>
-                <input type="text" name="name" id='name' placeholder="Your Name" className='h-12 w-[22rem] border rounded border-gray-300 pl-2 mb-2' />
-                <input type="email" name="email" id='email' placeholder="Your Email" className='h-12 w-[22rem] border rounded border-gray-300 pl-2' />
+                <input
+                  type='text'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder='Your Name'
+                  className='h-12 w-[22rem] border rounded border-gray-300 pl-2 mb-2'
+                />
+                <input
+                  type='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder='Your Email'
+                  className='h-12 w-[22rem] border rounded border-gray-300 pl-2'
+                />
               </div>
-              <div className='flex gap-1'>
-                <input type="text" name="name" id='name' placeholder="Portfolio Website" className='h-12 w-[22rem] border rounded border-gray-300 pl-2' />
-                <input type="file" name="email" id="formFile" placeholder="Choose File" className='h-12 w-[22rem] border rounded border-gray-300 pl-2 pt-2' />
-              </div>
-
               <div className='flex'>
-                <button className='h-12 w-[21rem] bg-[#F7A41B] text-white text-[1.3rem] mt-12 pb-2 rounded-full'>Apply Now</button>
-                <i><BsFillArrowLeftCircleFill className='h-10 w-auto mt-[3.3rem] ml-6' color='white' /></i>
+                <button
+                  type='submit'
+                  className='h-12 w-[21rem] bg-[#F7A41B] text-white text-[1.3rem] mt-7 pb-2 rounded-full'>
+                  Apply Now
+                </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

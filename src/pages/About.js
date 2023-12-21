@@ -1,17 +1,52 @@
 import React from 'react'
+// import React, {useEffect, useState} from 'react'
 import MyPic from '../images/myimg.jpg'
+// import { useNavigate } from 'react-router-dom';
 import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from 'react-icons/ai'
 
 export const About = () => {
+
+  // const navigate = useNavigate();
+  // const [userData, setUserData] = useState({});
+
+  // const callAboutPage = async () => {
+  //   try {
+  //     const res = await fetch('/about', {
+  //       method: 'GET',
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json"
+  //       },
+  //       credentials: "include"
+  //     });
+
+  //     const data = await res.json();
+  //     console.log(data);
+  //     setUserData(data);
+
+  //     if(res.status !== 200) {
+  //       const error = new Error(data.error); 
+  //       throw error;
+  //     }
+
+  //   } catch (err) {
+  //     console.log(err);
+  //     navigate('/login');
+  //   }
+  // }
+  // useEffect(() => {
+  //   callAboutPage();
+  // }, []);
+
   return (
     <>
       <h2 className='text-[3rem] text-center text-[#0D4451] mt-12'>About Author</h2>
       <div className='flex justify-evenly mt-16 '>
         <div>
-          <img src={MyPic} alt='My Image' className='h-[30rem] w-auto border rounded' />
+          <img src={MyPic} alt='My Img' className='h-[30rem] w-auto border rounded' />
         </div>
         <div>
-          <h2 className='text-5xl mb-7 text-white h-[4rem] w-[25rem] bg-[#F7A41B] border rounded-t-lg pl-3'>Megan Nagarkoti</h2>
+          <h2 className='text-5xl mb-7 h-[4.1rem] w-[58%] text-white bg-[#F7A41B] border rounded-t-lg  px-5'>Megan Nagarkoti</h2>
           <p className='text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam molestiae aut earum dolorum<br /> iure adipisci eaque repellendus totam laborum ipsam fuga voluptate unde asperiores <br />maiores voluptatibus, alias vero quasi sed! Temporibus corporis quaerat in nobis.</p><br/>
           <p className='text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam molestiae aut earum dolorum<br /> iure adipisci eaque repellendus totam laborum ipsam fuga voluptate unde asperiores <br />maiores voluptatibus, alias vero quasi sed! Temporibus corporis quaerat in nobis.</p>
           <div className='flex mt-11 ml-[10rem] gap-16'>
